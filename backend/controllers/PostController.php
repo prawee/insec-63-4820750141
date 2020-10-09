@@ -8,7 +8,7 @@ use backend\models\PostSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
+use common\components\AccessControl;
 
 /**
  * PostController implements the CRUD actions for Post model.
@@ -31,6 +31,10 @@ class PostController extends Controller
                     ],
                 ],
             ],*/
+            'access' => [
+                //'class' => 'common\components\AccessControl',
+                'class' => AccessControl::class
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -46,7 +50,7 @@ class PostController extends Controller
      */
     public function actionIndex()
     {
-        if (Yii::$app->user->can('post-list')) {
+        //if (Yii::$app->user->can('post-list')) {
             $searchModel = new PostSearch();
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -54,7 +58,7 @@ class PostController extends Controller
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
             ]);
-        }
+        //}
     }
 
     /**
