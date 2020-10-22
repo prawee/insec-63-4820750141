@@ -4,18 +4,18 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\PostSearch */
+/* @var $searchModel backend\models\AuthAssignmentSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Posts';
+$this->title = 'Auth Assignments';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="post-index">
+<div class="auth-assignment-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Post', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Auth Assignment', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -26,15 +26,17 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'title',
-            'short_description',
-            'description:ntext',
-            'is_active',
-            //'created_at',
-            //'created_by',
-            //'updated_at',
-            //'updated_by',
+            //'user_id',
+            //'username',
+            //'userName.username',
+            [
+                'attribute' => 'user_id',
+                'value' => function($model) {
+                    return $model->userName->username;
+                }
+            ],
+            'item_name',
+            'created_at',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

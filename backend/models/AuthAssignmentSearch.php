@@ -4,12 +4,12 @@ namespace backend\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\Post;
+use backend\models\AuthAssignment;
 
 /**
- * PostSearch represents the model behind the search form of `backend\models\Post`.
+ * AuthAssignmentSearch represents the model behind the search form of `backend\models\AuthAssignment`.
  */
-class PostSearch extends Post
+class AuthAssignmentSearch extends AuthAssignment
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class PostSearch extends Post
     public function rules()
     {
         return [
-            [['id', 'is_active', 'created_at', 'created_by', 'updated_at', 'updated_by'], 'integer'],
-            [['title', 'short_description', 'description'], 'safe'],
+            [['item_name', 'user_id'], 'safe'],
+            [['created_at'], 'integer'],
         ];
     }
 
@@ -40,7 +40,7 @@ class PostSearch extends Post
      */
     public function search($params)
     {
-        $query = Post::find();
+        $query = AuthAssignment::find();
 
         // add conditions that should always apply here
 
@@ -58,17 +58,11 @@ class PostSearch extends Post
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'is_active' => $this->is_active,
             'created_at' => $this->created_at,
-            'created_by' => $this->created_by,
-            'updated_at' => $this->updated_at,
-            'updated_by' => $this->updated_by,
         ]);
 
-        $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'short_description', $this->short_description])
-            ->andFilterWhere(['like', 'description', $this->description]);
+        $query->andFilterWhere(['like', 'item_name', $this->item_name])
+            ->andFilterWhere(['like', 'user_id', $this->user_id]);
 
         return $dataProvider;
     }

@@ -3,13 +3,13 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\Post */
+/* @var $model backend\models\AuthAssignment */
 
-$this->title = 'Create Post';
-$this->params['breadcrumbs'][] = ['label' => 'Posts', 'url' => ['index']];
+$this->title = 'Create Auth Assignment';
+$this->params['breadcrumbs'][] = ['label' => 'Auth Assignments', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="post-create">
+<div class="auth-assignment-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
